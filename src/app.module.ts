@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { UserModule } from './user/user.module';
+import { User } from './user/models/user.models';
 
 @Module({
   imports: [
@@ -13,12 +15,13 @@ import { SequelizeModule } from '@nestjs/sequelize';
       username: process.env.PG_USER,
       database: process.env.PG_DB,
       password: process.env.PG_PASSWORD,
-      host: process.env.HOST,
+      host: String(process.env.PG_HOST),
       port: +process.env.PG_PORT,
       logging: true,
       autoLoadModels: true, 
-      models: []
-    })
+      models: [User]
+    }),
+    UserModule
   ],
   controllers: [],
   providers: [],
