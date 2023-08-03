@@ -49,9 +49,22 @@ export class User extends Model<User, UserAttr> {
   })
   phone: string;
 
-  @ApiProperty({ example: 'qwer', description: '| User password' })
+  @ApiProperty({ example: 'Qw@r', description: '| User password' })
   @Column({
     type: DataType.STRING,
   })
   hashed_password: string;
+
+  @ApiProperty({ example: "token", description: "User's tokens" })
+  @Column({
+    type: DataType.STRING
+  })
+  hashed_refresh_token: string;
+
+  @ApiProperty({ example: true, description: "Is user active" })
+  @Column({
+    type: DataType.BOOLEAN,
+    defaultValue: true
+  })
+  is_active: boolean;
 }
